@@ -1,0 +1,10 @@
+build/
+dist/
+.git/
+.github/
+__pycache__/
+*.pyc
+*.pyo
+*.AppImage
+*.deb
+*.part

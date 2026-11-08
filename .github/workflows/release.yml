@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build release assets
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install packaging tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            desktop-file-utils appstream ffmpeg
+
+      - name: Build .deb
+        run: ./packaging/build_deb.sh
+
+      - name: Build AppImage
+        run: ./packaging/build_appimage.sh
+
+      - name: Verify AppImage frame quality
+        run: ./packaging/verify_appimage.sh dist/ResolveReady-*.AppImage
+
+      - name: Generate checksums
+        run: |
+          cd dist
+          sha256sum resolve-ready_*_all.deb ResolveReady-*.AppImage > SHA256SUMS
+
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v3
+        with:
+          name: Resolve Ready ${{ github.ref_name }}
+          body: |
+            ## Downloads
+
+            - **AppImage** — self-contained; recommended for most distributions. Download it, make it executable, and run it.
+            - **.deb** — install with `sudo apt install ./resolve-ready_*_all.deb`.
+            - **SHA256SUMS** — verify downloads with `sha256sum -c SHA256SUMS`.
+
+            The AppImage is for x86_64 Linux with glibc 2.35 or newer. The `.deb` uses the distribution's Python, GTK 4.6+, libadwaita 1.1+ and ffmpeg packages. Tested on Ubuntu 22.04, 24.04 and 26.04 and Debian 12 and 13 on amd64.
+
+            See the [changelog](https://github.com/mdshakibsami/resolve-ready/blob/main/CHANGELOG.md) for changes in this release and the [README](https://github.com/mdshakibsami/resolve-ready#readme) for full instructions and supported systems.
+          files: |
+            dist/resolve-ready_*_all.deb
+            dist/ResolveReady-*.AppImage
+            dist/SHA256SUMS
+          generate_release_notes: false
+          fail_on_unmatched_files: true

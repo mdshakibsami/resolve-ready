@@ -1,0 +1,26 @@
+resolve-ready (1.1.2) unstable; urgency=medium
+
+  * Rebuild the AppImage ffmpeg with x86 assembly enabled to fix magenta
+    chroma corruption in 8-bit DNxHR output.
+  * Add an end-to-end AppImage frame-quality check.
+
+ -- MD Shakib <126575973+mdshakibsami@users.noreply.github.com>  Sun, 08 Nov 2026 15:33:00 +0000
+
+resolve-ready (1.1.1) unstable; urgency=medium
+
+  * Update the application ID and maintainer identity to mdshakibsami.
+  * Remove the placeholder support link.
+  * Clarify the tested Ubuntu and Debian releases.
+
+ -- MD Shakib <126575973+mdshakibsami@users.noreply.github.com>  Sun, 08 Nov 2026 14:45:00 +0000
+
+resolve-ready (1.1.0) unstable; urgency=medium
+
+  * Initial public release.
+  * Run on Ubuntu 22.04/24.04/26.04 and Debian 12/13 with GTK 4.6 and libadwaita 1.1.
+  * Convert H.264, H.265 and AAC footage to DNxHR or ProRes with PCM audio.
+  * Verify every output before replacing the temporary file.
+  * Keep originals, with optional tar backup and per-batch summaries.
+  * Ship a self-contained AppImage with a static LGPL ffmpeg build.
+
+ -- MD Shakib <126575973+mdshakibsami@users.noreply.github.com>  Sun, 08 Nov 2026 00:00:00 +0000

@@ -1,0 +1,91 @@
+name: Bug report
+description: Report a reproducible problem with Resolve Ready.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for testing Resolve Ready. Please do not attach private or
+        copyrighted footage. A short synthetic clip generated with `ffmpeg` is
+        usually enough.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the problem and what you expected instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Start Resolve Ready with ...
+        2. Add this kind of file ...
+        3. Choose preset ...
+        4. See error ...
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Resolve Ready version
+      description: Output of `resolve-ready --version`, or the release tag.
+      placeholder: "1.1.2"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: package
+    attributes:
+      label: Package
+      options:
+        - AppImage
+        - .deb
+        - Running from source
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Distribution and version
+      placeholder: "Ubuntu 22.04.4 LTS, Debian 12.7, ..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: session
+    attributes:
+      label: Desktop session
+      options:
+        - X11
+        - Wayland
+        - XWayland
+        - Headless / other
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: |
+        Paste the relevant part of
+        `~/.local/state/resolve-ready/resolve-ready.log`. Remove private
+        filenames or paths first.
+      render: shell
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues for the same problem.
+          required: true
+        - label: I am not reporting a security vulnerability here.
+          required: true
+        - label: I have removed private or sensitive information from this report.
+          required: true

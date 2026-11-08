@@ -1,0 +1,33 @@
+.TH RESOLVE-READY 1 "2026-11-08" "Resolve Ready 1.1.2" "User Commands"
+.SH NAME
+resolve-ready \- convert video for DaVinci Resolve on Linux
+.SH SYNOPSIS
+.B resolve-ready
+.RI [ FILE ...]
+.SH DESCRIPTION
+.B resolve-ready
+is a small GTK 4 application that transcodes footage into formats
+DaVinci Resolve can edit on Linux.  It converts video to DNxHR or ProRes
+and audio to 24-bit PCM at 48 kHz, writes a
+.B .mov
+file, verifies the result, and keeps the original media.
+.PP
+When started without arguments it opens a window where files and folders
+can be dragged in.  File and folder arguments are added to the conversion
+queue on startup.
+.SH OPTIONS
+.TP
+.B \-\-version
+Print the application version and exit without starting GTK.
+.TP
+.B \-\-help
+Show the command-line options.
+.SH FILES
+.TP
+.I ~/.config/resolve-ready/settings.json
+User preferences and the last-used output folder.
+.SH SEE ALSO
+.BR ffmpeg (1),
+.BR ffprobe (1)
+.PP
+Project home page: https://github.com/mdshakibsami/resolve-ready

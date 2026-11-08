@@ -1,0 +1,4 @@
+#!/bin/sh
+# Launcher installed by the .deb package.
+export PYTHONPATH="/usr/lib/resolve-ready${PYTHONPATH:+:$PYTHONPATH}"
+exec python3 -m resolve_ready "$@"

@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test (${{ matrix.name }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Ubuntu 22.04
+            image: ubuntu:22.04
+          - name: Ubuntu 24.04
+            image: ubuntu:24.04
+          - name: Debian 12
+            image: debian:12
+          - name: Debian 13
+            image: debian:13
+    container:
+      image: ${{ matrix.image }}
+    steps:
+      - name: Install test dependencies
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            ca-certificates git python3 python3-gi gir1.2-gtk-4.0 gir1.2-adw-1 \
+            ffmpeg desktop-file-utils appstream
+
+      - uses: actions/checkout@v7
+
+      - name: Run unit tests
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Validate desktop entry
+        run: desktop-file-validate assets/io.github.mdshakibsami.ResolveReady.desktop
+
+      - name: Validate AppStream metadata
+        run: appstreamcli validate --no-net assets/io.github.mdshakibsami.ResolveReady.metainfo.xml
+
+  package:
+    name: Build and lint .deb
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install packaging tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends lintian desktop-file-utils appstream
+
+      - name: Build .deb
+        run: ./packaging/build_deb.sh
+
+      - name: Lint .deb
+        run: lintian -I --pedantic dist/resolve-ready_*_all.deb
+
+      - name: Upload .deb
+        uses: actions/upload-artifact@v7
+        with:
+          name: resolve-ready-deb
+          path: dist/resolve-ready_*_all.deb
+          if-no-files-found: error

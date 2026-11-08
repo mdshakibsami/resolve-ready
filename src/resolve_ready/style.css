@@ -1,0 +1,351 @@
+/* Resolve Ready — "Cutting Room"
+ *
+ * Graphite surfaces with a single tungsten-orange accent. Everything here is
+ * intentionally quiet: one accent, one radius scale, no gradients or glow.
+ * Colors are derived from libadwaita's theme tokens so dark and light mode
+ * both stay correct.
+ */
+
+@define-color rr_accent #e06f2f;
+@define-color rr_upload #e54c16;
+@define-color rr_upload_hover #d44713;
+@define-color rr_upload_active #bf3d0f;
+@define-color rr_mist #c9d2ce;
+@define-color rr_mist_hover #d5ddd9;
+@define-color rr_mist_active #bac4bf;
+@define-color rr_mist_fg #1e2824;
+@define-color rr_accent_fg #1f1107;
+@define-color rr_ok #5fbf8a;
+@define-color rr_warn #d9a441;
+@define-color rr_error #e0686d;
+
+/* Re-tint libadwaita's accent so buttons, focus rings and selections match. */
+@define-color accent_bg_color @rr_accent;
+@define-color accent_fg_color @rr_accent_fg;
+@define-color accent_color mix(@rr_accent, @window_fg_color, 0.35);
+
+/* Adaptive text colors: mix toward the current foreground. */
+@define-color rr_accent_text mix(@rr_accent, @window_fg_color, 0.35);
+@define-color rr_ok_text mix(@rr_ok, @window_fg_color, 0.35);
+@define-color rr_warn_text mix(@rr_warn, @window_fg_color, 0.35);
+@define-color rr_error_text mix(@rr_error, @window_fg_color, 0.35);
+@define-color rr_muted_text mix(@window_fg_color, @window_bg_color, 0.30);
+
+@define-color rr_border alpha(@window_fg_color, 0.12);
+@define-color rr_hover alpha(@window_fg_color, 0.05);
+@define-color rr_selection alpha(@rr_accent, 0.11);
+
+/* ---------------------------------------------------------------- cards */
+.rr-card {
+  background-color: @card_bg_color;
+  border: 1px solid @rr_border;
+  border-radius: 12px;
+}
+
+/* Light mode: mist-toned sections with crisp white input fields. */
+.rr-light .rr-card,
+.rr-light .rr-queue {
+  background-color: #eef2f1;
+  border-color: #d6deda;
+}
+
+.rr-light .rr-settings-card dropdown > button {
+  background-color: #ffffff;
+  border-color: #c9d3cf;
+  box-shadow: none;
+}
+
+.rr-card-title {
+  font-size: 1.18em;
+  font-weight: 700;
+}
+
+.rr-section-title {
+  font-size: 0.74em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: @rr_muted_text;
+}
+
+.rr-field-label {
+  font-size: 0.9em;
+  color: @rr_muted_text;
+}
+
+/* ------------------------------------------------------------- drop zone */
+.rr-source-card {
+  padding: 22px 20px;
+  border: 1px dashed alpha(@rr_accent, 0.85);
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.rr-source-card:hover {
+  background-color: alpha(@rr_accent, 0.045);
+  border-color: @rr_accent;
+}
+
+.rr-source-card.rr-drag-active {
+  border: 1px dashed @rr_accent;
+  background-color: alpha(@rr_accent, 0.09);
+}
+
+button.rr-upload-button {
+  background-color: @rr_upload;
+  background-image: none;
+  color: #ffffff;
+  border: 1px solid alpha(#000000, 0.12);
+  box-shadow: 0 1px 2px alpha(#000000, 0.18);
+  font-weight: 600;
+}
+
+button.rr-upload-button:hover {
+  background-color: @rr_upload_hover;
+}
+
+button.rr-upload-button:active {
+  background-color: @rr_upload_active;
+}
+
+button.rr-upload-button:disabled {
+  background-color: alpha(@rr_upload, 0.42);
+  color: alpha(#ffffff, 0.72);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+button.rr-folder-button {
+  background-color: @rr_mist;
+  background-image: none;
+  color: @rr_mist_fg;
+  border: 1px solid alpha(#000000, 0.12);
+  box-shadow: 0 1px 2px alpha(#000000, 0.10);
+  font-weight: 600;
+}
+
+button.rr-folder-button:hover {
+  background-color: @rr_mist_hover;
+}
+
+button.rr-folder-button:active {
+  background-color: @rr_mist_active;
+}
+
+.rr-folder-icon {
+  color: #b84714;
+}
+
+.rr-icon-tile {
+  min-width: 52px;
+  min-height: 52px;
+  border-radius: 14px;
+  background-color: alpha(@rr_accent, 0.13);
+}
+
+.rr-icon-tile image {
+  color: @rr_accent_text;
+}
+
+.rr-source-card.rr-drag-active .rr-icon-tile {
+  background-color: alpha(@rr_accent, 0.22);
+}
+
+/* -------------------------------------------------------------- settings */
+.rr-settings-card {
+  padding: 14px 18px 16px 18px;
+}
+
+.rr-settings-card:disabled {
+  opacity: 0.55;
+}
+
+.rr-switch-row {
+  padding: 3px 0;
+}
+
+.rr-switch-title {
+  font-weight: 500;
+}
+
+.rr-custom-path {
+  font-size: 0.8em;
+  color: @rr_muted_text;
+}
+
+/* ----------------------------------------------------------------- queue */
+.rr-count-pill {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background-color: alpha(@rr_accent, 0.12);
+  color: @rr_accent_text;
+  font-size: 0.76em;
+  font-weight: 700;
+}
+
+.rr-queue {
+  background-color: @card_bg_color;
+  border: 1px solid @rr_border;
+  border-radius: 12px;
+}
+
+.rr-queue-view {
+  background-color: transparent;
+}
+
+.rr-queue-view header {
+  background-color: transparent;
+  border-bottom: 1px solid @rr_border;
+}
+
+.rr-queue-view header button {
+  min-height: 34px;
+  padding: 6px 8px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  font-size: 0.78em;
+  font-weight: 600;
+  color: @rr_muted_text;
+}
+
+.rr-queue-view row {
+  min-height: 44px;
+  background-color: transparent;
+  border-bottom: 1px solid alpha(@window_fg_color, 0.055);
+}
+
+.rr-queue-view row:hover {
+  background-color: @rr_hover;
+}
+
+.rr-queue-view row:selected {
+  background-color: @rr_selection;
+  color: @window_fg_color;
+  box-shadow: inset 3px 0 @rr_accent;
+}
+
+.rr-queue-progress {
+  min-height: 4px;
+}
+
+.rr-queue-progress trough {
+  min-height: 4px;
+  border-radius: 999px;
+  background-color: alpha(@window_fg_color, 0.08);
+}
+
+.rr-queue-progress progress {
+  min-height: 4px;
+  border-radius: 999px;
+  background-color: @rr_accent;
+}
+
+/* ---------------------------------------------------------------- status */
+.rr-status-pill {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background-color: alpha(@window_fg_color, 0.05);
+  color: @rr_muted_text;
+  font-size: 0.8em;
+}
+
+.rr-status-dot {
+  min-width: 6px;
+  min-height: 6px;
+  border-radius: 999px;
+  background-color: @rr_muted_text;
+}
+
+.rr-status-pill.ok {
+  background-color: alpha(@rr_ok, 0.14);
+  color: @rr_ok_text;
+}
+
+.rr-status-pill.ok .rr-status-dot {
+  background-color: @rr_ok;
+}
+
+.rr-status-pill.warn {
+  background-color: alpha(@rr_warn, 0.14);
+  color: @rr_warn_text;
+}
+
+.rr-status-pill.warn .rr-status-dot {
+  background-color: @rr_warn;
+}
+
+.rr-status-pill.run {
+  background-color: alpha(@rr_accent, 0.15);
+  color: @rr_accent_text;
+}
+
+.rr-status-pill.run .rr-status-dot {
+  background-color: @rr_accent;
+}
+
+.rr-status-pill.error {
+  background-color: alpha(@rr_error, 0.14);
+  color: @rr_error_text;
+}
+
+.rr-status-pill.error .rr-status-dot {
+  background-color: @rr_error;
+}
+
+.rr-status-pill.muted {
+  background-color: alpha(@window_fg_color, 0.05);
+  color: @rr_muted_text;
+}
+
+.rr-status-pill.muted .rr-status-dot {
+  background-color: @rr_muted_text;
+}
+
+/* ----------------------------------------------------------- empty state */
+.rr-empty-state {
+  padding: 28px;
+}
+
+.rr-empty-icon-tile {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 12px;
+  background-color: alpha(@window_fg_color, 0.06);
+}
+
+.rr-empty-icon-tile image {
+  color: @rr_muted_text;
+}
+
+.rr-empty-title {
+  font-size: 1.02em;
+  font-weight: 600;
+}
+
+.rr-empty-subtitle {
+  font-size: 0.88em;
+  color: @rr_muted_text;
+}
+
+/* ---------------------------------------------------------------- footer */
+.rr-footer {
+  padding: 12px 16px;
+}
+
+.rr-summary {
+  font-size: 0.9em;
+  color: @rr_muted_text;
+  font-feature-settings: "tnum";
+}
+
+.rr-batch-progress trough {
+  min-height: 4px;
+  border-radius: 999px;
+  background-color: alpha(@window_fg_color, 0.08);
+}
+
+.rr-batch-progress progress {
+  min-height: 4px;
+  border-radius: 999px;
+  background-color: @rr_accent;
+}

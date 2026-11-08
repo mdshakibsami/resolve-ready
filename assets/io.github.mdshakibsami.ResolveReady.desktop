@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=Resolve Ready
+GenericName=Video Converter
+Comment=Convert video into formats DaVinci Resolve can edit on Linux
+Exec=resolve-ready %F
+TryExec=resolve-ready
+Icon=resolve-ready
+Terminal=false
+Categories=AudioVideo;Video;
+Keywords=DaVinci;Resolve;convert;transcode;DNxHR;ProRes;ffmpeg;
+MimeType=video/mp4;video/quicktime;video/x-matroska;video/x-msvideo;video/webm;video/mp2t;video/mpeg;
+StartupNotify=true
+StartupWMClass=io.github.mdshakibsami.ResolveReady

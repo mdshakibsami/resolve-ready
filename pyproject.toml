@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "resolve-ready"
+dynamic = ["version"]
+description = "Convert video into formats DaVinci Resolve can edit on Linux"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "MD Shakib" }]
+keywords = ["davinci", "resolve", "dnxhr", "prores", "ffmpeg", "video"]
+dependencies = []
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: X11 Applications :: GTK",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Video :: Conversion",
+]
+
+[project.urls]
+Homepage = "https://github.com/mdshakibsami/resolve-ready"
+Issues = "https://github.com/mdshakibsami/resolve-ready/issues"
+
+[project.scripts]
+resolve-ready = "resolve_ready.__main__:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+resolve_ready = ["style.css", "ui/film-symbolic.svg"]
+
+[tool.setuptools.dynamic]
+version = { attr = "resolve_ready.__version__" }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.mdshakibsami.ResolveReady</id>
+  <name>Resolve Ready</name>
+  <summary>Convert video into formats DaVinci Resolve can edit on Linux</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <developer id="io.github.mdshakibsami">
+    <name>MD Shakib</name>
+  </developer>
+
+  <description>
+    <p>
+      Resolve Ready prepares camera footage for DaVinci Resolve on Linux.
+      Resolve Free cannot decode H.264, H.265 or AAC, so this app transcodes
+      video to DNxHR or ProRes and audio to 24-bit PCM at 48 kHz.
+    </p>
+    <p>Every output is verified against its source. Originals are kept.</p>
+  </description>
+
+  <launchable type="desktop-id">io.github.mdshakibsami.ResolveReady.desktop</launchable>
+  <url type="homepage">https://github.com/mdshakibsami/resolve-ready</url>
+  <url type="bugtracker">https://github.com/mdshakibsami/resolve-ready/issues</url>
+  <provides>
+    <binary>resolve-ready</binary>
+  </provides>
+  <categories>
+    <category>AudioVideo</category>
+    <category>Video</category>
+  </categories>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="1.1.2" date="2026-11-08">
+      <description>
+        <p>Fixes magenta/green color bars in 8-bit DNxHR output from the AppImage.</p>
+        <p>Rebuilds the bundled FFmpeg with x86 assembly enabled.</p>
+      </description>
+    </release>
+    <release version="1.1.1" date="2026-11-08">
+      <description>
+        <p>Updates the application ID and maintainer identity to mdshakibsami.</p>
+        <p>Removes the placeholder support link until a real URL is available.</p>
+        <p>Clarifies the tested Ubuntu and Debian releases.</p>
+      </description>
+    </release>
+    <release version="1.1.0" date="2026-11-08">
+      <description>
+        <p>Adds a self-contained AppImage build and a universal .deb package.</p>
+        <p>Tested on Ubuntu 22.04, 24.04 and 26.04 and Debian 12 and 13.</p>
+      </description>
+    </release>
+    <release version="1.0.3" date="2026-11-07"/>
+    <release version="1.0.2" date="2026-11-07"/>
+    <release version="1.0.1" date="2026-11-07"/>
+    <release version="1.0.0" date="2026-11-05"/>
+  </releases>
+</component>
